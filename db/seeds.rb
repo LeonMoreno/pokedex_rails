@@ -15,9 +15,10 @@ puts '-------------------------------'
 
 csv_text = File.read(Rails.root.join('db', 'csv', 'pokemons.csv'))
 csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
+num = 0
 csv.each do |row|
 
-  poke = Pokemon.find_or_create_by(name: row['Name'])
+  poke = Pokemon.find_or_initialize_by(name: row['Name'])
 
   if poke.new_record?
     poke.num = row['#']
@@ -35,11 +36,13 @@ csv.each do |row|
     poke.legendary = row['Legendary']
     poke.save
     puts "Pokemon: #{row['Name']} created with success!"
+    num = num + 1
   else
     puts "Pokemon: #{poke.name} -- already exists"
   end
 end
 
 puts "\n ------------------------------- \n"
+puts "TOtal pokemons Create = #{num}"
 
 puts "Seed process end"

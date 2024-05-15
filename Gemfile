@@ -47,3 +47,11 @@ group :development do
   # gem "spring"
 end
 
+
+gem "grape", "~> 2.0"
+
+gem "will_paginate", "~> 4.0"
+
+gem "active_model_serializers", "~> 0.10.14"
+
+gem 'grape-active_model_serializers'
