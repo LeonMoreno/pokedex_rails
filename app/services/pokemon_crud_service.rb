@@ -19,18 +19,19 @@ class PokemonCrudService
     poke_res = Hash.new
     poke_res["total Pokemons:"] = pokes.count
     poke_res["total Pages:"] = pokes.total_pages
-    poke_res["next:"] = "#{path}=#{pokes.next_page}"
+    poke_res["next:"] = "#{path}=#{pokes.next_page}" if pokes.next_page
+    poke_res["previous:"] = "#{path}=#{pokes.previous_page}" if pokes.previous_page
     
     serializer_options = {}
     serializer_options[:each_serializer] = PokemonSerializer
     serializer_options[:only] = true
-    poke_res["List Pokemons:"] = ActiveModelSerializers::SerializableResource.new(pokes, serializer_options)
+    poke_res["results:"] = ActiveModelSerializers::SerializableResource.new(pokes, serializer_options)
     poke_res
   end
 
   def show 
     if poke_id.is_a?(Integer)
-      Pokemon.find_by(num: poke_id)
+      Pokemon.find_by(id: poke_id)
     elsif poke_id.is_a?(String)
       Pokemon.find_by(name: poke_id)
     end

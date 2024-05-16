@@ -76,6 +76,7 @@ module Api
         # DEL /api/v1/pokemons/
         desc 'Delete Pokemon by ID'
         params do
+          requires :id, types: [Integer, String], desc: 'ID of Pokemon.'
         end
         delete '/' do
           puts "Ahora a DELETE un POKE"
@@ -92,10 +93,11 @@ module Api
           end
         end
         
+         # GET /api/v1/pokemons/{id or name}
         route_param :id do
           desc 'Return information about a specific Pokémon'
           params do
-            requires :id, types: [Integer, String], desc: 'ID of Pokemon.'
+            requires :id, types: [Integer, String], desc: 'id of Pokemon or name.'
           end
           get do
             pokemon = ::PokemonCrudService.new(nil, declared(params)).show
@@ -108,8 +110,6 @@ module Api
             end
           end
         end
-
-
       end
     end
   end

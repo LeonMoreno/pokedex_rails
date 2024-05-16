@@ -1,12 +1,21 @@
 class PokemonSerializer < ActiveModel::Serializer
-  attributes  :num, :name, :type_1, :type_2, :total, :hp,
+  attributes  :natpoke_num, :name, :type, :total, :hp,
               :attack, :defense, :sp_atk, :sp_def, :speed, :generation, :legendary
+
+
+  def natpoke_num
+    object.num
+  end
+
+  def type
+    [object.type_1, object.type_2]
+  end
 
   def attributes(*args)
     hash = super
 
     if instance_options[:only]
-      hash.slice!(:num, :name, :type_1)
+      hash.slice!(:natpoke_num, :name, :type)
     end
     hash
   end
