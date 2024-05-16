@@ -6,7 +6,7 @@ class PokemonSerializer < ActiveModel::Serializer
     hash = super
 
     if instance_options[:only]
-      hash.slice!(:num, :name)
+      hash.slice!(:num, :name, :type_1)
     end
     hash
   end
