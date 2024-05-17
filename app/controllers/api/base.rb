@@ -23,5 +23,6 @@ module Api
     
     mount V1::Health
     mount V1::Pokemons
+    mount V1::Users
   end
 end

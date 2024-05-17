@@ -55,3 +55,5 @@ gem "will_paginate", "~> 4.0"
 gem "active_model_serializers", "~> 0.10.14"
 
 gem 'grape-active_model_serializers'
+
+gem 'bcrypt'
