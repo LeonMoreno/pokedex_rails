@@ -69,17 +69,26 @@ module Api
               pokemon
             else
               status 404
-              { "POkemon": "No existe" }
+              { "POkemon #{params[:id]}": "don't existe" }
             end
          end
         
         # DEL /api/v1/pokemons/
-        desc 'Delete Pokemon by ID'
-        params do
-          requires :id, types: [Integer, String], desc: 'ID of Pokemon.'
-        end
-        delete '/' do
-          puts "Ahora a DELETE un POKE"
+        route_param :id do
+          desc 'Delete Pokemon by ID'
+          params do
+            requires :id, types: Integer, desc: 'ID of Pokemon.'
+          end
+          delete do
+            pokemon = ::PokemonCrudService.new(nil, params).delete
+
+            unless pokemon.nil?
+              {"POkemon: #{pokemon.name} delete": "ok"}
+            else
+              status 404
+              {"Pokemon #{params[:id]}": "don't exist"}
+            end
+          end
         end
 
         # GET /api/v1/pokemons/search/ -- param name

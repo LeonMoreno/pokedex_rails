@@ -1,5 +1,5 @@
 class PokemonSerializer < ActiveModel::Serializer
-  attributes  :natpoke_num, :name, :type, :total, :hp,
+  attributes  :id, :natpoke_num, :name, :type, :total, :hp,
               :attack, :defense, :sp_atk, :sp_def, :speed, :generation, :legendary
 
 

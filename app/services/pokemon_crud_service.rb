@@ -49,6 +49,12 @@ class PokemonCrudService
     poke_to_update.nil? ? nil : poke_save(poke_to_update)
   end
 
+  def delete
+    poke = Pokemon.find_by(id: params[:id])
+
+    poke.nil? ? nil : poke.destroy
+  end
+
   private
   
   def poke_save(poke_to_save)
