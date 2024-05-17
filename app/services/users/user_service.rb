@@ -4,7 +4,7 @@ module Users
   class UserService
     attr_reader :params
     
-    def initialize(params)
+    def initialize(params = nil)
       @params = params
     end
 
