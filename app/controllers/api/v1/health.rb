@@ -3,9 +3,9 @@
 module Api
   module V1
     class Health < Grape::API
-    
       namespace :health do
         desc 'Return Ok'
+        before { authorize_request(request) }
         get '/' do
           { api: 'ok' }
         end

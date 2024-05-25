@@ -57,3 +57,4 @@ gem "active_model_serializers", "~> 0.10.14"
 gem 'grape-active_model_serializers'
 
 gem 'bcrypt'
+gem "jwt", "~> 2.8"
