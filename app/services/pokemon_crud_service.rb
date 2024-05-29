@@ -11,25 +11,14 @@ class PokemonCrudService
   end
 
   def index
-    host = request.host_with_port
-    path = request.fullpath.split("=")[0]
+    path = request.fullpath.split('=')[0]
+    path = make_path(path)
 
-    path.include?("?page") ? path = path : path = "#{path}?page"
-
-    poke_res = Hash.new
-    poke_res["total Pokemons:"] = pokes.count
-    poke_res["total Pages:"] = pokes.total_pages
-    poke_res["next:"] = "#{path}=#{pokes.next_page}" if pokes.next_page
-    poke_res["previous:"] = "#{path}=#{pokes.previous_page}" if pokes.previous_page
-    
-    serializer_options = {}
-    serializer_options[:each_serializer] = PokemonSerializer
-    serializer_options[:only] = true
-    poke_res["results:"] = ActiveModelSerializers::SerializableResource.new(pokes, serializer_options)
-    poke_res
+    serializer_options = make_serializer_options
+    make_response(path, serializer_options)
   end
 
-  def show 
+  def show
     if poke_id.is_a?(Integer)
       Pokemon.find_by(id: poke_id)
     elsif poke_id.is_a?(String)
@@ -44,7 +33,8 @@ class PokemonCrudService
   end
 
   def update
-    poke_to_update = Pokemon.find_by(name: params[:pokemon][:name])
+    puts "params = #{params}"
+    poke_to_update = Pokemon.find_by(id: params[:id])
 
     poke_to_update.nil? ? nil : poke_save(poke_to_update)
   end
@@ -56,7 +46,30 @@ class PokemonCrudService
   end
 
   private
-  
+
+  def make_path(path)
+    return path if path.include?('?page')
+
+    "#{path}?page"
+  end
+
+  def make_response(path, serializer_options)
+    {
+      'total Pokemons:' => pokes.count,
+      'total Pages:' => pokes.total_pages,
+      'next:' => pokes.next_page ? "#{path}=#{pokes.next_page}" : nil,
+      'previous:' => pokes.previous_page ? "#{path}=#{pokes.previous_page}" : nil,
+      'results:' => ActiveModelSerializers::SerializableResource.new(pokes, serializer_options)
+    }.compact
+  end
+
+  def make_serializer_options
+    {
+      'each_serializer:' => PokemonSerializer,
+      'only:' => true
+    }.compact
+  end
+
   def poke_save(poke_to_save)
     poke_new_data = params[:pokemon]
 

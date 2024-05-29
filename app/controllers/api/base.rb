@@ -12,7 +12,7 @@ module Api
     get '/' do
       status :no_content
     end
- 
+
     mount V1::Health
     mount V1::Pokemons
     mount V1::Users
