@@ -1,19 +1,31 @@
 # frozen_string_literal: true
 
 class PokemonSearchService
-  def self.search(params)
-    res = Hash.new
-    
-    pokes = Pokemon.where('name LIKE ?', "%#{params[:name]}%")
-    pokes = pokes.paginate(page: params[:page], per_page: 25)
-    res["total Pokemons find: "] = pokes.count
-    res["total Pages: "] = pokes.total_pages
-    res["next:"] = pokes.next_page if pokes.next_page
-    
-    serializer_options = {}
-    serializer_options[:each_serializer] = PokemonSerializer
-    serializer_options[:only] = true
-    res["List Pokemons:"] = ActiveModelSerializers::SerializableResource.new(pokes, serializer_options)
-    res
+  class << self
+    def search(params)
+      pokes = Pokemon.where('name LIKE ?', "%#{params[:name]}%")
+      pokes = pokes.paginate(page: params[:page], per_page: 25)
+
+      serializer_options = make_serializer_options
+      make_response(pokes, serializer_options)
+    end
+
+    private
+
+    def make_response(pokes, serializer_options)
+      {
+        'total Pokemons find': pokes.count,
+        'total Pages': pokes.total_pages,
+        next: pokes.next_page || nil,
+        'List Pokemons': ActiveModelSerializers::SerializableResource.new(pokes, serializer_options)
+      }.compact
+    end
+
+    def make_serializer_options
+      {
+        each_serializer: PokemonSerializer,
+        only: true
+      }.compact
+    end
   end
 end

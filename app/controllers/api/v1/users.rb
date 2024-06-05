@@ -10,10 +10,10 @@ module Api
           requires :password, type: String, desc: 'User password'
         end
         post '/' do
-          user = ::Users::UserService.new(params).create
+          response = ::Users::UserService.new(params).create
 
-          error!("Email #{params[:email]} already exist", 422) if user.nil?
-          user
+          error!("Email #{params[:email]} already exist", 422) if response.nil?
+          response
         end
       end
     end

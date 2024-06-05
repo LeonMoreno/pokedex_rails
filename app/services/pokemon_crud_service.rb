@@ -33,7 +33,6 @@ class PokemonCrudService
   end
 
   def update
-    puts "params = #{params}"
     poke_to_update = Pokemon.find_by(id: params[:id])
 
     poke_to_update.nil? ? nil : poke_save(poke_to_update)
@@ -42,7 +41,7 @@ class PokemonCrudService
   def delete
     poke = Pokemon.find_by(id: params[:id])
 
-    poke.nil? ? nil : poke.destroy
+    poke&.destroy
   end
 
   private
@@ -55,11 +54,11 @@ class PokemonCrudService
 
   def make_response(path, serializer_options)
     {
-      'total Pokemons:' => pokes.count,
-      'total Pages:' => pokes.total_pages,
-      'next:' => pokes.next_page ? "#{path}=#{pokes.next_page}" : nil,
-      'previous:' => pokes.previous_page ? "#{path}=#{pokes.previous_page}" : nil,
-      'results:' => ActiveModelSerializers::SerializableResource.new(pokes, serializer_options)
+      'total Pokemons': pokes.count,
+      'total Pages': pokes.total_pages,
+      next: pokes.next_page ? "#{path}=#{pokes.next_page}" : nil,
+      previous: pokes.previous_page ? "#{path}=#{pokes.previous_page}" : nil,
+      results: ActiveModelSerializers::SerializableResource.new(pokes, serializer_options)
     }.compact
   end
 
