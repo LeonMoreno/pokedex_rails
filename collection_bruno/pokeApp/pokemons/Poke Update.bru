@@ -5,7 +5,20 @@ meta {
 }
 
 put {
-  url: {{baseUrl}}/pokemons
-  body: none
-  auth: none
+  url: {{baseUrl}}/pokemons/813
+  body: json
+  auth: bearer
+}
+
+auth:bearer {
+  token: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMCwiZXhwIjoxNzE4MTMyNjUwfQ.dqqwnGhWK7E-cSBjTNecgT39EdXutxtE7IHJEmMfkpw
+}
+
+body:json {
+  {
+    "pokemon": {
+      "name": "LeoMoreno",
+      "type_2": "Quebecois"
+    }
+  }
 }
