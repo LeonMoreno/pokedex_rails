@@ -3,15 +3,8 @@
 module Api
   module V1
     class Pokemons < Grape::API
-      resource :pokemons do
-        # GET /api/v1/pokemons/
-        desc 'Return all Pokes'
-        params do
-          optional :page, type: Integer, default: 1
-        end
-        get '/' do
-          ::PokemonCrudService.new(request, declared(params)).index
-        end
+      namespace :pokemons do
+        before { authorize_request(request) }
 
         desc 'Create new Pokemon'
         params do
@@ -35,10 +28,9 @@ module Api
 
           poke.nil? ? error!("POkemon #{params[:pokemon][:name]} already exist", 409) : poke
         end
-  
+
         route_param :id do
           desc 'Update Pokemon by ID'
-          before { authorize_request(request) }
           params do
             requires :id, types: Integer, desc: 'ID of Pokemon.'
             requires :pokemon, type: Hash do
@@ -67,7 +59,6 @@ module Api
 
         route_param :id do
           desc 'Delete Pokemon by ID'
-          before { authorize_request(request) }
           params do
             requires :id, types: Integer, desc: 'ID of Pokemon.'
           end
@@ -77,28 +68,6 @@ module Api
             error!("Pokemon #{params[:id]}: don't exist", 404) if poke.nil?
 
             { "POkemon: #{poke.name} delete": 'ok' }
-          end
-        end
-
-        namespace :search do
-          desc 'Search pokemon by name'
-          params do
-            requires :name, type: String, desc: 'Name of the Pokémon'
-          end
-          get do
-            ::PokemonSearchService.search(declared(params))
-          end
-        end
-
-        route_param :id do
-          desc 'Return information about a specific Pokémon'
-          params do
-            requires :id, types: [Integer, String], desc: 'id of Pokemon or name.'
-          end
-          get do
-            poke = ::PokemonCrudService.new(nil, declared(params)).show
-
-            poke.nil? ? error!("Pokemon #{params[:id]}: not found", 404) : poke
           end
         end
       end

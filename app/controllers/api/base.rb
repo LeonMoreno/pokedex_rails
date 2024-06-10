@@ -15,6 +15,7 @@ module Api
 
     mount V1::Health
     mount V1::Pokemons
+    mount V1::PokemonsList
     mount V1::Users
     mount V1::Authentication
   end
