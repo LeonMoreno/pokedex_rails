@@ -1,0 +1,16 @@
+meta {
+  name: Auth Login
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/auth/login
+  body: multipartForm
+  auth: none
+}
+
+body:multipart-form {
+  email: leo@algo.com
+  password: 123456
+}

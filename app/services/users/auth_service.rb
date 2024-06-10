@@ -2,18 +2,18 @@
 
 module Users
   class AuthService
-  include JsonWebToken
-  attr_reader :email, :password
+    include JsonWebToken
+    attr_reader :email, :password
 
-  def initialize(params)
-    @email = params[:email]
-    @password = params[:password]
-  end
+    def initialize(params)
+      @email = params[:email]
+      @password = params[:password]
+    end
 
-  def login
-    user = User.find_by(email: email)
+    def login
+      user = User.find_by(email:)
 
-    user&.authenticate(password) ? encode_token(user_id: user.id) : nil
-  end
+      user&.authenticate(password) ? encode_token(user_id: user.id) : nil
+    end
   end
 end

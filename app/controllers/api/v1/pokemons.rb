@@ -13,7 +13,6 @@ module Api
           ::PokemonCrudService.new(request, declared(params)).index
         end
 
-        # POST /api/v1/pokemons/
         desc 'Create new Pokemon'
         params do
           requires :pokemon, type: Hash do
@@ -31,15 +30,15 @@ module Api
             optional :legendary, type: Boolean, default: false, desc: 'Is Legendary POkemon'
           end
         end
-        post '/' do
+        post do
           poke = ::PokemonCrudService.new(nil, declared(params)).create
 
           poke.nil? ? error!("POkemon #{params[:pokemon][:name]} already exist", 409) : poke
         end
-
-        # PUT /api/v1/pokemons/
+  
         route_param :id do
           desc 'Update Pokemon by ID'
+          before { authorize_request(request) }
           params do
             requires :id, types: Integer, desc: 'ID of Pokemon.'
             requires :pokemon, type: Hash do
@@ -66,9 +65,9 @@ module Api
           end
         end
 
-        # DEL /api/v1/pokemons/
         route_param :id do
           desc 'Delete Pokemon by ID'
+          before { authorize_request(request) }
           params do
             requires :id, types: Integer, desc: 'ID of Pokemon.'
           end
@@ -81,7 +80,6 @@ module Api
           end
         end
 
-        # GET /api/v1/pokemons/search/ -- param name
         namespace :search do
           desc 'Search pokemon by name'
           params do
@@ -92,7 +90,6 @@ module Api
           end
         end
 
-        # GET /api/v1/pokemons/{id or name}
         route_param :id do
           desc 'Return information about a specific Pokémon'
           params do

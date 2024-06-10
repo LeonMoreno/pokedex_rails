@@ -1,0 +1,16 @@
+meta {
+  name: Creat User
+  type: http
+  seq: 2
+}
+
+post {
+  url: {{baseUrl}}/users
+  body: multipartForm
+  auth: none
+}
+
+body:multipart-form {
+  email: leo10@algo.com
+  password: 123456
+}

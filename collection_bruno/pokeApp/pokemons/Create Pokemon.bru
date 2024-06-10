@@ -1,0 +1,20 @@
+meta {
+  name: Create Pokemon
+  type: http
+  seq: 6
+}
+
+post {
+  url: {{baseUrl}}/pokemons
+  body: json
+  auth: none
+}
+
+body:json {
+  {
+    "pokemon": {
+      "name": "LeoMore",
+      "type_1": "Xamundy"
+    }
+  }
+}
