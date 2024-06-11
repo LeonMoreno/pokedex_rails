@@ -74,3 +74,4 @@ Follow these steps to test the application:
 
 # Tests
 
+![Screenshot from 2024-06-11 14-00-23](https://github.com/LeonMoreno/pokedex_rails/assets/88601147/7c08c9e3-ff1e-4c20-a4b5-6f956a996510)
