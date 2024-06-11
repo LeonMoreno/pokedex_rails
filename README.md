@@ -4,7 +4,7 @@
  
  ## Improvements
 
-- Mi propio docker compose para manejo de PostgreSQL y pgadmin como no se.
+- Using my own docker-compose file to manage PostgreSQL and pgAdmin as services.
 - Added basic authentication using JSON Web Tokens (JWT) with the `jwt` gem.
 - Enhanced security with password hashing using the `bcrypt` gem.
 - Routes are defined and managed using the `grape` gem, which provides a simple DSL for creating RESTful APIs in Ruby.
