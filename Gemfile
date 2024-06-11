@@ -1,20 +1,41 @@
-source "https://rubygems.org"
+# frozen_string_literal: true
 
-ruby "3.3.1"
+source 'https://rubygems.org'
+
+ruby '3.3.1'
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
-gem "rails", "~> 7.1.3", ">= 7.1.3.2"
+gem 'rails', '~> 7.1.3', '>= 7.1.3.2'
 
 # Use postgresql as the database for Active Record
-gem "pg", "~> 1.1"
+gem 'pg', '~> 1.1'
 
 # Use the Puma web server [https://github.com/puma/puma]
-gem "puma", ">= 5.0"
+gem 'puma', '>= 5.0'
 
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 # gem "jbuilder"
 
+# CSV file handling and manipulation
 gem 'csv'
+
+# API framework for building RESTful APIs
+gem 'grape', '~> 2.0'
+
+# Pagination library for ActiveRecord
+gem 'will_paginate', '~> 4.0'
+
+# JSON serialization for ActiveModel objects
+gem 'active_model_serializers', '~> 0.10.14'
+
+# Integration of Grape with ActiveModelSerializers
+gem 'grape-active_model_serializers'
+
+# Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
+gem 'bcrypt'
+
+# JSON Web Token implementation in Ruby
+gem 'jwt', '~> 2.8'
 
 # Use Redis adapter to run Action Cable in production
 # gem "redis", ">= 4.0.1"
@@ -22,14 +43,11 @@ gem 'csv'
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]
 # gem "kredis"
 
-# Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
-# gem "bcrypt", "~> 3.1.7"
-
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem "tzinfo-data", platforms: %i[ windows jruby ]
+gem 'tzinfo-data', platforms: %i[windows jruby]
 
 # Reduces boot times through caching; required in config/boot.rb
-gem "bootsnap", require: false
+gem 'bootsnap', require: false
 
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
@@ -39,22 +57,10 @@ gem "bootsnap", require: false
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
-  gem "debug", platforms: %i[ mri windows ]
+  gem 'debug', platforms: %i[mri windows]
 end
 
 group :development do
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
 end
-
-
-gem "grape", "~> 2.0"
-
-gem "will_paginate", "~> 4.0"
-
-gem "active_model_serializers", "~> 0.10.14"
-
-gem 'grape-active_model_serializers'
-
-gem 'bcrypt'
-gem "jwt", "~> 2.8"

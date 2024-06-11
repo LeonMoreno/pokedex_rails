@@ -1,24 +1,73 @@
-# README
+# 💡 About the project
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+ This project is an enhanced second version of the Pokedex project originally created as part of the PETAL onboarding. The Restful API exposes Pokemon information to potential clients, allowing queries and manipulations through well-defined endpoints.
+ 
+ ## Improvements
 
-Things you may want to cover:
+- Mi propio docker compose para manejo de PostgreSQL y pgadmin como no se.
+- Added basic authentication using JSON Web Tokens (JWT) with the `jwt` gem.
+- Enhanced security with password hashing using the `bcrypt` gem.
+- Routes are defined and managed using the `grape` gem, which provides a simple DSL for creating RESTful APIs in Ruby.
+- Implemented serializers with `active_model_serializers` and `grape-active_model_serializers`.
+- Pagination is handled with the `will_paginate` gem.
+- Testing is performed using the `rspec` gem, ensuring reliability and correctness of the application.
 
-* Ruby version
+ # Routes
 
-* System dependencies
+The API provides 8 routes, all of which can be tested using the Postman/Bruno collection:
 
-* Configuration
+## Pokedex Routes
 
-* Database creation
+- **Index**: Retrieves all Pokemon data.
+  - Endpoint: `localhost:3000/api/v1/pokemons`
 
-* Database initialization
+- **Show**: Retrieves data for a specific Pokemon by ID.
+  - Endpoint: `localhost:3000/api/v1/pokemons/:id`
 
-* How to run the test suite
+- **Search**: Allows searching for Pokemon by their name.
+  - Endpoint: `localhost:3000/api/v1/search?name=name`
 
-* Services (job queues, cache servers, search engines, etc.)
+- **Create**: Adds a new Pokemon to the database.
+  - Endpoint: `POST localhost:3000/api/v1/pokemons`
 
-* Deployment instructions
+- **Update**: Modifies the information of an existing Pokemon.
+  - Endpoint: `PATCH localhost:3000/api/v1/pokemons/:id`
 
-* ...
+- **Delete**: Removes a Pokemon from the database.
+  - Endpoint: `DELETE localhost:3000/api/v1/pokemons/:id`
+
+
+## Authentication Routes: User Registration and Login
+
+For access to the create, update, and delete routes, authentication via token is required.
+
+- **Create User**: Registers a new user in the system.
+  - Endpoint: `POST localhost:3000/api/v1/users`
+
+- **Login**: Authenticates a user and generates a JWT token for further access.
+  - Endpoint: `POST localhost:3000/api/v1/auth/login`
+
+
+# How to test
+
+Follow these steps to test the application:
+
+1) Start Docker service:
+
+    `docker compose up -d`
+
+2) Create the database by running the following command:
+
+    `rails db:create`
+
+3) Run the migrations to set up the database schema:
+
+    `rails db:migrate`
+
+4) Seed the database with initial data if necessary:
+
+    `rails db:seed`
+
+5) Launch the Rails server:
+
+     `rails s`

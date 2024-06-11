@@ -7,17 +7,13 @@ meta {
 post {
   url: {{baseUrl}}/pokemons
   body: json
-  auth: bearer
-}
-
-auth:bearer {
-  token: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMCwiZXhwIjoxNzE4MTMyNjUwfQ.dqqwnGhWK7E-cSBjTNecgT39EdXutxtE7IHJEmMfkpw
+  auth: inherit
 }
 
 body:json {
   {
     "pokemon": {
-      "name": "LeoMor",
+      "name": "PuliMor",
       "type_1": "Xamundy"
     }
   }

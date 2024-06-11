@@ -5,19 +5,15 @@ meta {
 }
 
 put {
-  url: {{baseUrl}}/pokemons/813
+  url: {{baseUrl}}/pokemons/815
   body: json
-  auth: bearer
-}
-
-auth:bearer {
-  token: eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxMCwiZXhwIjoxNzE4MTMyNjUwfQ.dqqwnGhWK7E-cSBjTNecgT39EdXutxtE7IHJEmMfkpw
+  auth: inherit
 }
 
 body:json {
   {
     "pokemon": {
-      "name": "LeoMoreno",
+      "name": "PuliMoreno",
       "type_2": "Quebecois"
     }
   }

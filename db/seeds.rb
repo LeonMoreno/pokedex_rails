@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # This file should ensure the existence of records required to run the application in every environment (production,
 # development, test). The code here should be idempotent so that it can be executed at any point in every environment.
 # The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
@@ -9,15 +11,19 @@
 #   end
 require 'csv'
 
-puts "Seed process Init"
+puts 'Seed process Init'
 
-puts '-------------------------------'
+puts '-----Create User ---------------'
+
+puts 'Creating User.'
+user = User.create!(email: 'user@algo.com', password: '123456')
+
+puts '-----Create Pokemons ---------------'
 
 csv_text = File.read(Rails.root.join('db', 'csv', 'pokemons.csv'))
-csv = CSV.parse(csv_text, :headers => true, :encoding => 'ISO-8859-1')
+csv = CSV.parse(csv_text, headers: true, encoding: 'ISO-8859-1')
 num = 0
 csv.each do |row|
-
   poke = Pokemon.find_or_initialize_by(name: row['Name'])
 
   if poke.new_record?
@@ -36,7 +42,7 @@ csv.each do |row|
     poke.legendary = row['Legendary']
     poke.save
     puts "Pokemon: #{row['Name']} created with success!"
-    num = num + 1
+    num += 1
   else
     puts "Pokemon: #{poke.name} -- already exists"
   end
@@ -44,5 +50,6 @@ end
 
 puts "\n ------------------------------- \n"
 puts "TOtal pokemons Create = #{num}"
+puts "The User: #{user.email} has been created successfully."
 
-puts "Seed process end"
+puts 'Seed process end'
