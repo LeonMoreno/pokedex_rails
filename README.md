@@ -39,7 +39,7 @@ The API provides 8 routes, all of which can be tested using the Postman/Bruno co
 
 ## Authentication Routes: User Registration and Login
 
-For access to the create, update, and delete routes, authentication via token is required.
+To access the create, update, and delete routes for the Pokedex, authentication via token is required.
 
 - **Create User**: Registers a new user in the system.
   - Endpoint: `POST localhost:3000/api/v1/users`
@@ -48,7 +48,7 @@ For access to the create, update, and delete routes, authentication via token is
   - Endpoint: `POST localhost:3000/api/v1/auth/login`
 
 
-# How to test
+# How to Run
 
 Follow these steps to test the application:
 
@@ -71,3 +71,6 @@ Follow these steps to test the application:
 5) Launch the Rails server:
 
      `rails s`
+
+# Tests
+
