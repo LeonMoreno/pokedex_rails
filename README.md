@@ -1,6 +1,6 @@
 # 💡 About the project
 
- This project is an enhanced second version of the Pokedex project originally created as part of the PETAL onboarding. The Restful API exposes Pokemon information to potential clients, allowing queries and manipulations through well-defined endpoints.
+Pokedex API on Rails project is an enhanced second version of the Pokedex project originally created as part of the PETAL onboarding. The Restful API exposes Pokemon information to potential clients, allowing queries and manipulations through well-defined endpoints.
  
  ## Improvements
 
